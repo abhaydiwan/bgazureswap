@@ -79,4 +79,29 @@ stages:
           csmFile: '$(System.DefaultWorkingDirectory)/**/bgswap/bluedeploy.json'
           csmParametersFile: '$(System.DefaultWorkingDirectory)/**/bgswap/bluedeploy.parameters.json'
           deploymentMode: Complete
-              
+      - task: AzureResourceGroupDeployment@2
+        displayName: Validate ARM template
+        enabled: 'true'
+        inputs:
+          azureSubscription: 'AzureServiceConnection'
+          action: 'Create Or Update Resource Group'
+          resourceGroupName: '$(ResourceGroupName)'
+          location: 'East US'
+          templateLocation: 'Linked artifact'
+          csmFile: '$(System.DefaultWorkingDirectory)/**/bgswap/greendeploy.json'
+          csmParametersFile: '$(System.DefaultWorkingDirectory)/**/bgswap/greendeploy.parameters.json'
+          deploymentMode: 'Validation'
+      
+      - task: AzureResourceGroupDeployment@2
+        displayName: Create Or Update Resource Group
+        enabled: 'true'
+        inputs:
+          azureSubscription: 'AzureServiceConnection'
+          action: 'Create Or Update Resource Group'
+          resourceGroupName: '$(ResourceGroupName)'
+          location: 'West Europe'
+          templateLocation: 'Linked artifact'
+          csmFile: '$(System.DefaultWorkingDirectory)/**/bgswap/greendeploy.json'
+          csmParametersFile: '$(System.DefaultWorkingDirectory)/**/bgswap/grrendeploy.parameters.json'
+          deploymentMode: Complete
+                
