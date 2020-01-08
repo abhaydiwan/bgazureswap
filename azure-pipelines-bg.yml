@@ -102,6 +102,6 @@ stages:
           location: 'West Europe'
           templateLocation: 'Linked artifact'
           csmFile: '$(System.DefaultWorkingDirectory)/**/bgswap/greendeploy.json'
-          csmParametersFile: '$(System.DefaultWorkingDirectory)/**/bgswap/grrendeploy.parameters.json'
+          csmParametersFile: '$(System.DefaultWorkingDirectory)/**/bgswap/greendeploy.parameters.json'
           deploymentMode: Complete
                 
