@@ -67,7 +67,7 @@ stages:
           csmParametersFile: '$(System.DefaultWorkingDirectory)/**/bgswap/bluedeploy.parameters.json'
           deploymentMode: 'Validation'
 
-      - task: AzurePowerShell@4
+      - task: AzurePowerShell@3
         displayName: Blue Green Swap
         inputs:
           azureSubscription: 'AzureServiceConnection'
