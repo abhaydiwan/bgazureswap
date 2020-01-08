@@ -1,0 +1,42 @@
+pr:
+  branches:
+    include:
+      - dev
+  paths:
+    exclude:
+      - docs/*
+      - README.md
+
+trigger:
+ branches:
+   include:
+     - master
+
+stages:
+- stage: Build_Stage
+  displayName: Build Stage
+  jobs:
+
+  - job: Infrastructure
+    displayName: Publish Infra files Job
+    pool:
+      name: Hosted Ubuntu 1604
+      vmImage: 'ubuntu-16.04'
+    steps:
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact: ARM templates'
+      inputs:
+        PathtoPublish: AzureResourceGroupDeployment
+        ArtifactName: arm
+  - job: Infrastructure
+    displayName: Publish Infra files Job
+    pool:
+      name: Hosted Ubuntu 1604
+      vmImage: 'ubuntu-16.04'
+    steps:
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact: ARM templates'
+      inputs:
+        PathtoPublish: bgswap
+        ArtifactName: bgswap
+
