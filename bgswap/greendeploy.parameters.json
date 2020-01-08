@@ -14,11 +14,11 @@
     "instanceCount": {
       "value": 1
     },
-    "administratorLogin": {
-      "value": "greenvnet"
+    "adminUsername": {
+      "value": "bluevnet"
     },
-    "administratorLoginPassword": {
-      "value": "@Aa123456"
+    "adminPassword": {
+      "value": "P@ssword1234"
     }
   }
 }
