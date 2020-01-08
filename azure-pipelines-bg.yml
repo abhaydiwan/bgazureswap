@@ -28,3 +28,55 @@ stages:
         PathtoPublish: bgswap
         ArtifactName: bgswap
 
+- stage: Dev_Stage
+  displayName: Dev Stage
+  dependsOn: Build_Stage
+  jobs:
+    - job: Dev
+      displayName: Deploy to Dev Job
+      pool:
+        name: Hosted Windows 2019 with VS2019 
+        vmImage: 'windows-2019'
+      variables:
+        Parameters.ConnectedServiceName: 'AzureServiceConnection' # couldn't be referenced
+        ResourceGroupName: 'blue-green-deployment'
+
+      steps:
+      - checkout: none
+          
+      - task: DownloadBuildArtifacts@0
+        displayName: Download Build Artifacts
+        inputs:
+          artifactName: bgswap
+          downloadPath: $(System.DefaultWorkingDirectory)        
+
+      - task: CmdLine@2
+        inputs:
+          script: 'ls'
+    
+      - task: AzureResourceGroupDeployment@2
+        displayName: Validate ARM template
+        enabled: 'true'
+        inputs:
+          azureSubscription: 'AzureServiceConnection'
+          action: 'Create Or Update Resource Group'
+          resourceGroupName: '$(ResourceGroupName)'
+          location: 'East US'
+          templateLocation: 'Linked artifact'
+          csmFile: '$(System.DefaultWorkingDirectory)/**/bgswap/bluedeploy.json'
+          csmParametersFile: '$(System.DefaultWorkingDirectory)/**/bgswap/bluedeploy.parameters.json'
+          deploymentMode: 'Validation'
+    
+      - task: AzureResourceGroupDeployment@2
+        displayName: Create Or Update Resource Group
+        enabled: 'true'
+        inputs:
+          azureSubscription: 'AzureServiceConnection'
+          action: 'Create Or Update Resource Group'
+          resourceGroupName: '$(ResourceGroupName)'
+          location: 'West Europe'
+          templateLocation: 'Linked artifact'
+          csmFile: '$(System.DefaultWorkingDirectory)/**/bgswap/bluedeploy.json'
+          csmParametersFile: '$(System.DefaultWorkingDirectory)/**/bgswap/bluedeploy.parameters.json'
+          deploymentMode: Complete
+              

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "vmSku": {
+      "value": "Standard_D1_v2"
+    },
+    "vmssName": {
+      "value": "greenabha"
+    },
+    "vnetName": {
+      "value": "Standard_D1_v2"
+    },
+    "instanceCount": {
+      "value": 1
+    },
+    "administratorLogin": {
+      "value": "greenvnet"
+    },
+    "administratorLoginPassword": {
+      "value": "@Aa123456"
+    }
+  }
+}
+
+
