@@ -72,4 +72,5 @@ stages:
         inputs:
           azureSubscription: 'AzureServiceConnection'
           scriptType: filePath
-          scriptPath: $(System.DefaultWorkingDirectory)\**\bgswap\vip_swap.ps1          
+          scriptPath: $(System.DefaultWorkingDirectory)\**\bgswap\vip_swap.ps1
+          azurePowerShellVersion: latestVersion          
