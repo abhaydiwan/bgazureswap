@@ -9,13 +9,13 @@
         "value": "blueabhay"
       },
       "vnetName": {
-        "value": "Standard_D1_v2"
+        "value": "bluevnet"
       },
       "instanceCount": {
         "value": 1
       },
       "adminUsername": {
-        "value": "bluevnet"
+        "value": "abhay"
       },
       "adminPassword": {
         "value": "P@ssword1234"
